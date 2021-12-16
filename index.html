@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tạo và thao tác với mảng</title>
+</head>
+<body>
+<h3>[Thực hành] Tạo và thao tác với mảng</h3>
+<input type="number" id="input">
+<input type="button" value="Add" onclick="add()">
+<input type="button" value="Remove" onclick="remove()">
+<input type="button" value="Sort array" onclick="sortArray()">
+<hr>
+<p id="display"></p>
+</body>
+<script>
+    let input = document.getElementById('input');
+    let display = document.getElementById('display');
+    let arr =[];
+    let element;
+
+    function add(){
+        read();
+        arr.push(element);
+        update();
+    }
+    function remove() {
+        read();
+        let index = arr.indexOf(element);
+        if (index === -1) {
+            // nếu không tìm thấy element thì sẽ xóa element cuối cùng
+            index = arr.length - 1;
+        }
+        for (let i = index; i < arr.length ; i++) {
+            arr[i] = arr[i + 1];
+        }
+        arr.pop();
+        update();
+    }
+    function sortArray(){
+        // arr.sort();          // sắp xếp theo bảng chữ cái
+        arr.sort(function(a,b){return a - b;}); // sắp xếp theo số từ bé đến lớn
+        update();
+    }
+
+    function read(){
+        element = parseFloat(input.value);
+
+    }
+    function update(){
+        let content='';
+        for (let i in arr){
+            content += 'Element '+ i + ' = '+ arr[i]+'<br>';
+        }
+        display.innerHTML = content;
+        refresh();
+    }
+    function refresh(){
+        input.value = "";
+        input.focus();
+        input.select();
+    }
+
+
+
+</script>
+
+</html>
